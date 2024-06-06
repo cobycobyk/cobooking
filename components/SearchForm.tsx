@@ -57,7 +57,25 @@ function SearchForm() {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
+    const checkin_monthday = values.dates.from.getDate().toString();
+    const checkin_month = (values.dates.from.getMonth() + 1).toString();
+    const checkin_year = values.dates.from.getFullYear().toString();
+    const checkout_monthday = values.dates.to.getDate().toString();
+    const checkout_month = (values.dates.to.getMonth() + 1).toString();
+    const checkout_year = values.dates.to.getFullYear().toString();
 
+    const checkin = `${checkin_year}-${checkin_month}-${checkin_monthday}`;
+    const checkout = `${checkout_year}-${checkout_month}-${checkout_monthday}`;
+
+    const url = new URL("https://www.booking.com/searchresults.html");
+    url.searchParams.set("ss", values.location);
+    url.searchParams.set("group_adults", values.adults);
+    url.searchParams.set("group_children", values.children);
+    url.searchParams.set("no_rooms", values.rooms);
+    url.searchParams.set("checkin", checkin);
+    url.searchParams.set("checkout", checkout);
+
+    router.push(`/search?url=${url.href}`);
   }
 
   return (
@@ -99,7 +117,7 @@ function SearchForm() {
                         name="dates"
                         variant={"outline"}
                         className={cn(
-                          "w-[300px] justify-start text-left font-normal",
+                          "w-full lg:w-[300px] justify-start text-left font-normal",
                           !field.value.from && "text-muted-foreground"
                         )}
                       >
@@ -152,6 +170,39 @@ function SearchForm() {
                 </FormItem>
               )}
             />
+          </div>
+          <div className="grid items-center flex-1">
+            <FormField
+              control={form.control}
+              name="children"
+              render={({ field }) => (
+                <FormItem className="flex flex-col">
+                  <FormLabel className="text-white">Children</FormLabel>
+                  <FormMessage />
+                  <FormControl>
+                    <Input type="number" placeholder="Children" {...field} />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+          </div>
+          <div className="grid items-center flex-1">
+            <FormField
+              control={form.control}
+              name="rooms"
+              render={({ field }) => (
+                <FormItem className="flex flex-col">
+                  <FormLabel className="text-white">Rooms</FormLabel>
+                  <FormMessage />
+                  <FormControl>
+                    <Input type="number" placeholder="Rooms" {...field} />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+          </div>
+          <div className="mt-auto">
+            <Button type="submit" className="bg-blue-500 text-base">Search</Button>
           </div>
         </div>
       </form>
