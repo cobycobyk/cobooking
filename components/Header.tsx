@@ -48,7 +48,7 @@ function Header() {
         <Link href="/" className="-m-1.5 p-1.5">
           <span className="sr-only">Cobooking</span>        
           <div className="h-12 w-auto text-white">
-            Cobooking
+            Cobooking.com
           </div>
         </Link>
         </div>
