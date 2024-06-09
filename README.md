@@ -1,7 +1,7 @@
 ## Cobooking Travel Site
 
-![screenshot](https://imgur.com/a/FNlW94Y.png)
-![screenshot](https://imgur.com/a/mUEUiFq.png)
+![screenshot](https://i.imgur.com/QZ114t4.png)
+![screenshot](https://i.imgur.com/TpD0P8E.png)
 
 ## Full Stack Travel Booking Web App
 ### Technologies Used
