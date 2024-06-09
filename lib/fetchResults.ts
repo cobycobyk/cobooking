@@ -140,7 +140,7 @@ export async function fetchResults(searchParams: SearchParams) {
     },
   }).then((response) => response.json())
     .then((data) => {
-      if (data.results.length === 0) return;
+      if (data.results?.length === 0) return;
       const result: Result = data.results[0];
 
       return result;
